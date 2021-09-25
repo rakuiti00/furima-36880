@@ -2,20 +2,16 @@ class ItemsController < ApplicationController
 
   before_action :authenticate_user!, only: [:new]
 
-  # トップページの表示
   def index
   end
 
-  # 商品出品ページの表示
   def new
     @item = Item.new
   end
 
-  #商品情報の保存
   def create
     @item = Item.new(item_params)
 
-    # 保存判定
     if @item.save
       redirect_to root_path      
     else

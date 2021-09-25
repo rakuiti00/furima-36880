@@ -5,19 +5,16 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
          
 
-  # 全角（漢字・ひらがな・カタカナ）での入力が必須であること       
   with_options presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/ } do
           validates :family_name
           validates :first_name
   end
 
- # 全角（カタカナ）での入力が必須であること        
   with_options presence: true, format: { with: /\A[ァ-ヴー]+\z/u } do
     validates :family_name_kana
     validates :first_name_kana
   end
 
-  # 半角英数字混合での入力が必須であること
   validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i }
 
   validates :nickname, presence: true

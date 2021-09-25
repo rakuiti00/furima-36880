@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe Item, type: :model do
   before do
-    # インスタンスを生成
     @item = FactoryBot.build(:item)
   end
 
@@ -86,6 +85,18 @@ RSpec.describe Item, type: :model do
         @item.price = 10000000
         @item.valid?
         expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
+      end
+
+      it 'priceが少数の場合は登録できない' do
+        @item.price = 300.5
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price must be an integer")
+      end
+
+      it 'userが紐付いていなければ出品できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("User must exist")
       end
       
     end

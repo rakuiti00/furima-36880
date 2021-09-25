@@ -1,7 +1,6 @@
 class Item < ApplicationRecord
 
   extend ActiveHash::Associations::ActiveRecordExtensions
-  # ActiveHashのアソシエーション
   belongs_to :category
   belongs_to :item_status
   belongs_to :shipping_charges
@@ -11,23 +10,18 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
 
-  #バリデーション
   validates :name, presence: true
   validates :description, presence: true
   validates :image, presence: true
   validates :price, presence: true
 
-  #ActiveHash バリデーション
   validates :category_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :item_status_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :shipping_charges_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :shipping_area_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :days_to_ship_id, numericality: { other_than: 1 , message: "can't be blank"}
 
-  #価格のバリデーション
-  #半角数値のみ
-  #300~¥9,999,999の間のみ
-  validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 },
+  validates :price, numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 },
                   format: { with: /\A[0-9]+\z/ }
 
 end

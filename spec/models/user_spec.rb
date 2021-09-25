@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   before do
-    # インスタンスを生成
     @user = FactoryBot.build(:user)
   end
 
