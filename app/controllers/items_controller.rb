@@ -14,7 +14,6 @@ class ItemsController < ApplicationController
   #商品情報の保存
   def create
     @item = Item.new(item_params)
-    binding.pry
 
     # 保存判定
     if @item.save
