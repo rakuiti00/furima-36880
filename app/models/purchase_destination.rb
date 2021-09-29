@@ -9,9 +9,7 @@ class PurchaseDestination
       validates :shipping_area_id
       validates :city
       validates :address
-      validates :building_name
-      validates :phone_number, format: {with: /\A\d{10}\z/}
-      validates :purchase_history_id
+      validates :phone_number #, format: {with: /\A\d{10}\z/}
       validates :user_id
       validates :item_id
     end
