@@ -15,7 +15,7 @@ class PurchaseDestination
     end
 
     def save
-      purchase = PurchaseHistory.create(user_id: useer_id, item_id: item_id)
+      purchase = PurchaseHistory.create(user_id: user_id, item_id: item_id)
       Destination.create(postal_code:postal_code, shipping_area_id:shipping_area_id, city: city, address: address, building_name: building_name, phone_number: phone_number, purchase_history_id: purchase.id )
     end
 

@@ -1,6 +1,6 @@
 class PurchaseHistoriesController < ApplicationController
   def index
-    @purchase = PurchaseDestination.new
+    @purchase_destination  = PurchaseDestination.new
     @item = Item.find(params[:item_id])
 
   end
@@ -12,7 +12,6 @@ class PurchaseHistoriesController < ApplicationController
        @purchase_destination.save
        redirect_to root_path
     else
-      binding.pry
       @item = Item.find(params[:item_id])
       render :index
     end
@@ -21,7 +20,7 @@ class PurchaseHistoriesController < ApplicationController
   private
     
   def purchase_params
-   params.require(:purchase_destination).permit(:item_id,:postal_code,:shipping_area_id,:city,:address,:building_name,:phone_number).merge(user_id: current_user.id)
+   params.require(:purchase_destination).permit(:postal_code,:shipping_area_id,:city,:address,:building_name,:phone_number).merge(user_id: current_user.id,item_id: params[:item_id])
   end
 
 
