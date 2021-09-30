@@ -12,6 +12,7 @@ class PurchaseDestination
       validates :phone_number, format: {with: /\A\d{11}\z|\A\d{10}\z/}
       validates :user_id
       validates :item_id
+      validates :token
     end
 
     def save

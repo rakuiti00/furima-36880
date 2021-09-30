@@ -2,7 +2,6 @@ class PurchaseHistoriesController < ApplicationController
   def index
     @purchase_destination  = PurchaseDestination.new
     @item = Item.find(params[:item_id])
-
   end
 
   def create
