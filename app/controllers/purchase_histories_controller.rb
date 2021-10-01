@@ -1,17 +1,16 @@
 class PurchaseHistoriesController < ApplicationController
 
+  before_action :set_item, only: [:index, :create]
   before_action :move_to_index, only: [:index]
   before_action :authenticate_user!, only: [:index]
 
 
   def index
     @purchase_destination  = PurchaseDestination.new
-    @item = Item.find(params[:item_id])
   end
 
   def create
     @purchase_destination = PurchaseDestination.new(purchase_params)
-    @item = Item.find(params[:item_id])
 
     if @purchase_destination.valid?
 
@@ -20,7 +19,6 @@ class PurchaseHistoriesController < ApplicationController
        @purchase_destination.save
        redirect_to root_path
     else
-      @item = Item.find(params[:item_id])
       render :index
     end
   end
@@ -41,7 +39,6 @@ class PurchaseHistoriesController < ApplicationController
   end
 
   def move_to_index
-    @item = Item.find(params[:item_id])
     if user_signed_in?
       if current_user.id == @item.user.id
         redirect_to controller: :items, action: :index
@@ -49,5 +46,9 @@ class PurchaseHistoriesController < ApplicationController
         redirect_to controller: :items, action: :index
       end      
     end  
-  end  
+  end 
+  
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
 end

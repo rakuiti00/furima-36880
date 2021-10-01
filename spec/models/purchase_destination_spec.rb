@@ -98,6 +98,19 @@ RSpec.describe PurchaseDestination, type: :model do
         @purchase_destination.valid?
         expect(@purchase_destination.errors.full_messages).to include("Token can't be blank")
       end
+
+      it 'userが紐づいていないと登録できないこと' do
+        @purchase_destination.user_id = nil
+        @purchase_destination.valid?
+        expect(@purchase_destination.errors.full_messages).to include("User can't be blank")
+      end
+
+      it 'itemが紐づいていないと登録できないこと' do
+        @purchase_destination.item_id = nil
+        @purchase_destination.valid?
+        expect(@purchase_destination.errors.full_messages).to include("Item can't be blank")
+      end
+
       
     end
   end
