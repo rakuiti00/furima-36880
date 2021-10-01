@@ -60,7 +60,8 @@ class ItemsController < ApplicationController
 
     if !(user_signed_in? && current_user.id == @item.user.id) 
       redirect_to action: :index
+    elsif current_user.id == @item.user.id && PurchaseHistory.exists?(item_id: @item.id)
+      redirect_to action: :index
     end
-
   end
 end
