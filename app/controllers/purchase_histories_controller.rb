@@ -1,4 +1,9 @@
 class PurchaseHistoriesController < ApplicationController
+
+  before_action :move_to_index, only: [:index]
+  before_action :authenticate_user!, only: [:index]
+
+
   def index
     @purchase_destination  = PurchaseDestination.new
     @item = Item.find(params[:item_id])
@@ -35,5 +40,14 @@ class PurchaseHistoriesController < ApplicationController
     )
   end
 
-
+  def move_to_index
+    @item = Item.find(params[:item_id])
+    if user_signed_in?
+      if current_user.id == @item.user.id
+        redirect_to controller: :items, action: :index
+      elsif  current_user.id != @item.user.id && PurchaseHistory.exists?(item_id: @item.id)
+        redirect_to controller: :items, action: :index
+      end      
+    end  
+  end  
 end
