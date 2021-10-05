@@ -28,5 +28,7 @@ ja:
             phone_number:          電話番号
             shipping_area_id:      発送元の地域
             token:                 クレジットカード情報
+            user_id:               ユーザー
+            item_id:               商品
         
 
