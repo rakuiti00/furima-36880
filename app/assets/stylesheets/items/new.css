@@ -227,3 +227,11 @@
 .inc {
   font-size: 13px;
 }
+
+#image_preview{
+  margin-bottom: 15px;
+}
+#image_preview img{
+  width: 100px;
+  height: 100px;
+}
